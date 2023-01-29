@@ -6,7 +6,7 @@ const port= 3000;
 
 app.use(express.json())
 app.use(cors());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
 
 const users=[
     {
@@ -85,11 +85,11 @@ app.get("/", async(req,res)=>{
     res.send("Welcome to the Api, add /users to the url and get the data");
 });
 
-app.get("/users",()=>{
+app.get(`/users`,(req,res)=>{
     res.send(users);
 });
 
-app.get("/users/:id",(req,res)=>{
+app.get(`/users/:id`,(req,res)=>{
     const {id}=req.params;
     const user =users.filter((u)=>u.id==id);
     res.send(user);
